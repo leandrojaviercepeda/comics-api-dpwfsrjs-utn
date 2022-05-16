@@ -1,8 +1,0 @@
-# Instrucciones:
-# * Cambie el nombre del archivo env a .env
-# * Reemplace los valores de las variables de entorno segun su configuracion
-
-MYSQL_HOST=your_host
-MYSQL_DB_NAME=your_mysql_db_name
-MYSQL_USER=your_mysql_user
-MYSQL_PASSWORD=your_mysql_password
