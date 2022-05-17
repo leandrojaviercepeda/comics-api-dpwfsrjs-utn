@@ -12,8 +12,6 @@ const config = {
     port: process.env.MYSQL_PORT,
 };
 
-console.warn({config})
-
 const pool = mysql.createPool(config);
 pool.query = util.promisify(pool.query);
 
