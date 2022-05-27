@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const util = require('util');
-const characters = require('../db/characters');
-const movies = require('../db/movies');
+const characters = require('../json/characters');
+const movies = require('../json/movies');
 
 const config = {
     connectionLimit: 10,
@@ -11,6 +11,8 @@ const config = {
     database: process.env.MYSQL_DATABASE,
     port: process.env.MYSQL_PORT,
 };
+
+console.warn({config})
 
 const pool = mysql.createPool(config);
 pool.query = util.promisify(pool.query);

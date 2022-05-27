@@ -1,2 +1,7 @@
-# Dependency directories
-node_modules/
+# Carpetas ignoradas para minimizar el contexto enviado al docker daemon para levantar la imagen
+build
+node_modules
+.gitignore
+.env*
+docker-compose.yml
+*.md

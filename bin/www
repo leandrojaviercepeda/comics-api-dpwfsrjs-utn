@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('comics-api:server');
 var http = require('http');
-var DB = require('../src/DB');
+var os = require("os");
 
 /**
  * Get port from environment and store in Express.
@@ -83,14 +83,10 @@ function onError(error) {
  */
 
 function onListening() {
-  try {
-    DB.init();
-  } catch (error) {
-    console.error(error)
-  }
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
+  console.warn(`Server listening on ${bind}`);
   debug('Listening on ' + bind);
 }

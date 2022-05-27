@@ -1,5 +1,14 @@
-FROM node:latest
+FROM alpine:3.14.3
+RUN apk add --no-cache nodejs
+RUN apk add --no-cache npm
+
 WORKDIR /usr/src/app
-COPY . .
-EXPOSE 5000
-# RUN apk add --no-cache gcc musl-dev linux-headers
+
+COPY package*.json ./
+COPY ./bin ./bin
+COPY ./json ./json
+COPY ./routes ./routes
+COPY ./src ./src
+COPY app.js .
+
+EXPOSE 8080
