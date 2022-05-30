@@ -17,4 +17,3 @@ services:
       NOTIFICATION_PASS: none
       NOTIFICATION_SERVICE: gmail
       PORT: 8080
-    command: sh -c 'npm install; npm start;'

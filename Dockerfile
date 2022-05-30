@@ -5,6 +5,9 @@ RUN apk add --no-cache npm
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+
+RUN npm install
+
 COPY ./bin ./bin
 COPY ./json ./json
 COPY ./routes ./routes
