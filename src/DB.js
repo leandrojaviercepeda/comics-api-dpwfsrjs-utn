@@ -91,7 +91,7 @@ async function init() {
         }
 
         Promise.all(promises)
-        .then(resp => console.warn("Database initialization success :D", resp))
+        .then(() => console.warn("Database initialization success :D"))
         .catch(error => console.error("Database initialization error", error))
     } catch (error) {
         console.error(error);

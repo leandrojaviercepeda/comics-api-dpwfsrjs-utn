@@ -16,13 +16,13 @@ services:
   comics-api:
     depends_on:
     - comics-db
-    image: leandrojaviercepeda/comics-api-dpwfsrjs-utn:develop-latest
+    # image: leandrojaviercepeda/comics-api-dpwfsrjs-utn:develop-latest
     container_name: comics-api
     restart: always
     ports: 
     - 4000:4000
     links:
-      - comics-db
+    - comics-db
     environment:
     - PORT=4000
     - MYSQL_CONNECTION_LIMIT=100

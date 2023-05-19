@@ -14,4 +14,6 @@ COPY ./routes ./routes
 COPY ./src ./src
 COPY app.js .
 
-EXPOSE 8080
+CMD ["npm", "start"]
+
+EXPOSE 4000
