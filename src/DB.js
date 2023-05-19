@@ -1,10 +1,10 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const util = require('util');
 const characters = require('../json/characters');
 const movies = require('../json/movies');
 
 const config = {
-    connectionLimit: 10,
+    connectionLimit: process.env.MYSQL_CONNECTION_LIMIT,
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
@@ -12,10 +12,15 @@ const config = {
     port: process.env.MYSQL_PORT,
 };
 
-console.warn({config})
-
 const pool = mysql.createPool(config);
 pool.query = util.promisify(pool.query);
+pool.getConnection((error) => {
+    if (error) {
+        console.error("Database connection error: ", error, config);
+    } else {
+        console.warn("Database connection success :D ");
+    }
+})
 
 function getCols(objArray) {
     const cols = [];
@@ -86,8 +91,8 @@ async function init() {
         }
 
         Promise.all(promises)
-        .then(response => console.warn("DB initialized"))
-        .catch(error => console.error("Error at initializing db", error))
+        .then(resp => console.warn("Database initialization success :D", resp))
+        .catch(error => console.error("Database initialization error", error))
     } catch (error) {
         console.error(error);
     }

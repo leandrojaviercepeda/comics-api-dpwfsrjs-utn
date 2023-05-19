@@ -1,0 +1,58 @@
+version: "3.5"
+services:
+  comics-db:
+    image: mysql
+    container_name: comics-db
+    restart: always
+    environment:
+    - MYSQL_ROOT_PASSWORD=2b67766ac41415ec93a07df1ada9b2b5
+    - MYSQL_DATABASE=comics
+    ports: 
+    - 3306:3306
+    volumes:
+    - mysql-data:/var/lib/mysql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  comics-api:
+    depends_on:
+    - comics-db
+    image: leandrojaviercepeda/comics-api-dpwfsrjs-utn:develop-latest
+    container_name: comics-api
+    restart: always
+    ports: 
+    - 4000:4000
+    links:
+      - comics-db
+    environment:
+    - PORT=4000
+    - MYSQL_CONNECTION_LIMIT=100
+    - MYSQL_HOST=comics-db
+    - MYSQL_USER=root
+    - MYSQL_PASSWORD=2b67766ac41415ec93a07df1ada9b2b5
+    - MYSQL_DATABASE=comics
+    - MYSQL_PORT=3306
+    - NOTIFICATION_PORT=587
+    - NOTIFICATION_HOST=comics-api
+    - NOTIFICATION_USER=comicsdpwfsrjs@gmail.com
+    - NOTIFICATION_PASS=none
+    - NOTIFICATION_SERVICE=gmail
+
+  # comics-web:
+  #   depends_on:
+  #   - comics-api
+  #   image: leandrojaviercepeda/comics-web-dpwfsrjs-utn:develop-latest
+  #   container_name: comics-web
+  #   restart: always
+  #   links:
+  #     - comics-backend
+  #   ports:
+  #   - 8080:8080
+  #   environment:
+  #   - PORT=8080
+  #   - REACT_APP_API_COMICS=http://backend:8080
+  #   - REACT_APP_API_MOVIE_DB=https://api.themoviedb.org/3
+  #   - REACT_APP_API_MOVIE_DB_IMG=https://image.tmdb.org/t/p/w500
+  #   - REACT_APP_APIKEY_MOVIE_DB=815158e35877de2d9b49bd1c31727638
+
+volumes:
+  mysql-data: null
