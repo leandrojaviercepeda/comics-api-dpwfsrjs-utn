@@ -16,7 +16,7 @@ services:
   comics-api:
     depends_on:
     - comics-db
-    # image: leandrojaviercepeda/comics-api-dpwfsrjs-utn:develop-latest
+    image: leandrojaviercepeda/comics-api-dpwfsrjs-utn:develop-latest
     container_name: comics-api
     restart: always
     ports: 
